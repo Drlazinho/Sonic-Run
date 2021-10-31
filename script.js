@@ -1,12 +1,11 @@
 const personagem = document.querySelector('#personagem')
 const mob = document.querySelector('#mob')
-
+let ponts = document.querySelector('.ponts')
 
 const somJump = new Audio();
 somJump.src = './assets/sonicspinner.wav'
 
 let isJumping = false;
-
 
 function handleKeyup(event) {
   if (event.keyCode === 32) {
@@ -15,6 +14,10 @@ function handleKeyup(event) {
       jump()
     };
   }
+}
+
+function refreshPage(){
+  window.location.reload();
 }
 
 function jump(){
@@ -37,8 +40,10 @@ var blackout = setInterval(() => {
     window.getComputedStyle(mob).getPropertyValue('left')
     )
     if(tocMob < -10 && tocMob > -30 && bottomPersonagem <= -400 ) {
-      alert('Você perdeu! Tentar novamente?')
-    }
+      document.body.innerHTML = `<div class="modal-game-over"><h1>Game Over</h1><button class="play-again" type="submit" onClick="refreshPage()">Play Again</button></div>`
+    } 
 }, 10)
+
+
 
 document.addEventListener('keyup', handleKeyup)
